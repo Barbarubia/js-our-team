@@ -44,17 +44,23 @@ const arrMembersTeam = [
 // Definizione dell'elemento HTML che contiene le singole cards dei membri del team
 const eleTeamContainer = document.querySelector('.team-container');
 
-// Eseguo la funzione che genera la griglia delle cards dei vari membri del team
+// Eseguo la funzione che genera la griglia di tutte le cards dei vari membri del team
 createTeamGrid();
 
 
 
-
-
-// Funzione che legge l'array dei membri del team e genera la griglia delle card
+// Funzione che esegue un ciclo for di tutte le singole cards che compongono l'array dei membri del team per visualizarle nella pagina
 function createTeamGrid() {
 // Ciclo for che crea una card per ogni membro del team
 for (let i = 0; i < arrMembersTeam.length; i++) {
+    createMemberCard(i);
+}
+}
+
+
+
+// Funzione che genera  la card dell'"i-esimo" elemento dell'array dei membri del team e l'appende al contenitore HTML
+function createMemberCard(i) {
     // generazione card per ogni membro
     let eleTeamCard = document.createElement('div');
     eleTeamCard.classList.add('team-card');
@@ -77,7 +83,6 @@ for (let i = 0; i < arrMembersTeam.length; i++) {
     let eleRole = document.createElement('p');
     eleRole.innerHTML = `${arrMembersTeam[i].role}`;
     eleCardText.append(eleRole);
-}
 }
 
 
@@ -103,8 +108,6 @@ eleAddMemberButton.addEventListener('click', addMember);
 
 
 
-
-
 // Funzione per aggiungere nuovi membri
 function addMember() {
     // leggo il nome digitato
@@ -126,8 +129,16 @@ function addMember() {
         alert('Name and Role are mandatory to add a new member!');
         // altrimenti
     } else {
-        // cancello la griglia precedente
-        eleTeamContainer.innerHTML = '';
+        /*
+        Ottimizzato codice
+        Questa parte dello script non serve più
+        Evito di far rigenerare tutta la griglia ad ogni aggiunta
+        (in caso di array molto numeroso genererebbe un rallentamento)
+
+            // cancello la griglia precedente
+            // eleTeamContainer.innerHTML = '';
+        */
+
         // creo un nuovo object con i dati del nuovo membro
         let newMember = 
         {
@@ -141,7 +152,7 @@ function addMember() {
         // testo che il nuovo membro sia stato aggiunto
         // console.log(arrMembersTeam);
 
-        // ricreo la griglia dei membri in base al nuovo array che contiene il nuovo membro
-        createTeamGrid();
+        // Appendo con l'apposita funzione la card con i dati dell'ultimo membro aggiunto
+        createMemberCard(arrMembersTeam.length - 1);
     }
 };
