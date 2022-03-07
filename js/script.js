@@ -1,3 +1,12 @@
+/*
+esercizio di oggi: Our Team
+nome repo: js-our-team
+Viene fornito un layout di base. Come prima cosa nel file js definitevi un array di oggetti che rappresentano i membro del team (prendete i dati dallo screen fornito). Ogni membro deve avere le informazioni necessarie per stampare la relativa card: Nome, Ruolo e Foto.
+Prendendo come riferimento la card di esempio presente nell'html, stampiamo dinamicamente una card per ogni membro del team.
+*/
+
+
+
 // Definizione array di oggetti che rappresentano i membri del team
 const arrMembersTeam = [
     {
@@ -18,7 +27,7 @@ const arrMembersTeam = [
     {
         name: 'Angela Lopez',
         role: 'Social Media Manager',
-        image: 'wayne-barnett-founder-ceo.jpg'
+        image: 'angela-lopez-social-media-manager.jpg'
     },
     {
         name: 'Scott Estrada',
@@ -35,6 +44,15 @@ const arrMembersTeam = [
 // Definizione dell'elemento HTML che contiene le singole cards dei membri del team
 const eleTeamContainer = document.querySelector('.team-container');
 
+// Eseguo la funzione che genera la griglia delle cards dei vari membri del team
+createTeamGrid();
+
+
+
+
+
+// Funzione che legge l'array dei membri del team e genera la griglia delle card
+function createTeamGrid() {
 // Ciclo for che crea una card per ogni membro del team
 for (let i = 0; i < arrMembersTeam.length; i++) {
     // generazione card per ogni membro
@@ -60,3 +78,70 @@ for (let i = 0; i < arrMembersTeam.length; i++) {
     eleRole.innerHTML = `${arrMembersTeam[i].role}`;
     eleCardText.append(eleRole);
 }
+}
+
+
+
+
+
+/*
+BONUS:
+Utilizziamo gli input presenti nella pagina per permettere all'utente di aggiungere nuovi membri del team: cliccando sul pulsante "add" viene creato un nuovo oggetto, il quale viene inserito nell'array iniziale, e viene stampata una nuova card con tutte le informazioni inserite dall'utente.
+*/
+
+// Definizione dell'elemento che contiene il bottone per aggiungere nuovi membri
+const eleAddMemberButton = document.getElementById('addMemberButton');
+// Definzione del campo dove viene digitato il nome del membro
+let eleInputName = document.getElementById('name');
+// Definzione del campo dove viene digitato il nome del membro
+let eleInputRole = document.getElementById('role');
+// Definzione del campo dove viene digitato il nome dell'immagine
+let eleInputImage = document.getElementById('image');
+
+// Esecuzione della funzione addMember al click sul bottone
+eleAddMemberButton.addEventListener('click', addMember);
+
+
+
+
+
+// Funzione per aggiungere nuovi membri
+function addMember() {
+    // leggo il nome digitato
+    let newMemberName = eleInputName.value;
+    // leggo il ruolo digitato
+    let newMemberRole = eleInputRole.value;
+
+    // leggo il nome dell'immagine
+    let newMemberImage = eleInputImage.value;
+
+    // se non è stata inserita nessuna immagine la sostituisco con una di default
+    if (newMemberImage == '') {
+        newMemberImage = 'blank-profile-image.jpg';
+    }
+
+    // effettuo un controllo sul nome e ruolo digitati, impostandoli come campi obbligatori
+    if (newMemberName == '' || newMemberRole == '') {
+        // se uno dei due è vuoto, stampo un alert
+        alert('Name and Role are mandatory to add a new member!');
+        // altrimenti
+    } else {
+        // cancello la griglia precedente
+        eleTeamContainer.innerHTML = '';
+        // creo un nuovo object con i dati del nuovo membro
+        let newMember = 
+        {
+        name: newMemberName,
+        role: newMemberRole,
+        image: newMemberImage
+        }
+
+        // aggiungo il nuovo membro nell'array dei membri del team
+        arrMembersTeam.push(newMember);
+        // testo che il nuovo membro sia stato aggiunto
+        // console.log(arrMembersTeam);
+
+        // ricreo la griglia dei membri in base al nuovo array che contiene il nuovo membro
+        createTeamGrid();
+    }
+};
