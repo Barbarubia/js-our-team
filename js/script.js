@@ -47,6 +47,9 @@ const eleTeamContainer = document.querySelector('.team-container');
 // Eseguo la funzione che genera la griglia di tutte le cards dei vari membri del team
 createTeamGrid();
 
+// TEST
+console.log(arrMembersTeam);
+
 
 
 // Funzione che esegue un ciclo for di tutte le singole cards che compongono l'array dei membri del team per visualizarle nella pagina
@@ -151,8 +154,17 @@ function addMember() {
         arrMembersTeam.push(newMember);
         // testo che il nuovo membro sia stato aggiunto
         // console.log(arrMembersTeam);
-
+        
+        
         // Appendo con l'apposita funzione la card con i dati dell'ultimo membro aggiunto
         createMemberCard(arrMembersTeam.length - 1);
+        
+        // TEST
+        console.log(arrMembersTeam);
+        
     }
+    // Ripulisco i campi dagli input digitati
+    eleInputName.value = '';
+    eleInputRole.value = '';
+    eleInputImage.value = '';
 };
