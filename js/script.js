@@ -47,7 +47,7 @@ for (let i = 0; i < arrMembersTeam.length; i++) {
     eleTeamCard.append(eleCardImage);
     let eleImg = document.createElement('img')
     eleImg.src = `img/${arrMembersTeam[i].image}`;
-    eleImg.alt = `img/${arrMembersTeam[i].name}`;
+    eleImg.alt = `${arrMembersTeam[i].name}`;
     eleCardImage.append(eleImg);
     // generazione elemento che contiene nome e ruolo del membro pescandoli dall'array dei membri
     let eleCardText = document.createElement('div');
